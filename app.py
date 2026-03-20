@@ -21,8 +21,14 @@ def get_stream():
             'skip_download': True,
             'noplaylist': True,
             'socket_timeout': 30,
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['web_creator', 'web'],
+                }
+            },
             'http_headers': {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept-Language': 'en-US,en;q=0.9',
             }
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -38,3 +44,8 @@ def get_stream():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
+```
+
+Commit → Render will auto-redeploy → test again in browser:
+```
+https://beatify-server.onrender.com/stream?id=dQw4w9WgXcQ
